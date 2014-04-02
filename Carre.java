@@ -1,12 +1,13 @@
 import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 public class Carre extends Applet implements Runnable
 {
   private int rouge=0, vert=0, bleu=0;
   private boolean mustStop;
-  Frame f;
+
   public void start()
   {
     this.mustStop = false;
@@ -20,17 +21,16 @@ public class Carre extends Applet implements Runnable
 
   public void run()
   {
-    int cpt = 0;
+    int cpt = 0, test=12;
     while (true && cpt<20)
     {
       this.paint(this.getGraphics());
       try {
+        // Provoquer une exception :
+        // test = test / (cpt-1);
         Thread.sleep(1000);
       } catch (Exception e) { 
-        f = new Frame("Erreur");
-        f.add(new Label("Une erreur s'est produite durant l'exécution du traitement !"+ e));
-        f.setSize(300, 400);
-        f.show();
+        JOptionPane.showMessageDialog (null, new String ("L'erreur suivante est survenue durant l'exécution : \n"+e)); 
       }
       if (this.mustStop == true)
         return;
